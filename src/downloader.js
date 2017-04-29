@@ -40,7 +40,7 @@ const download = (filename) => {
         response.on('error', reject)
         response.on('end', () => {
           UI.stop()
-          resolve()
+          resolve(filename)
         })
 
         response.pipe(file)
@@ -93,6 +93,8 @@ export default () => {
   moment.locale('it')
   const day = moment().subtract(2, 'day')
   const filename = `${moment(day).format('ddd_DDMMYYYY')}_ZOO${constants.EXTENSION}`
-  // download(filename)
-  convertToOgg(filename)
+  
+  download(filename)
+    .then(convertToOgg)
+    .catch((err) => console.error(err))
 }

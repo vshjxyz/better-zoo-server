@@ -1,0 +1,37 @@
+{
+  "name": "better-zoo-server",
+  "version": "1.0.0",
+  "main": "bin/downloader.js",
+  "author": "Luca Del Bianco <vshjxyz@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "node bin/downloader.js",
+    "debug": "iron-node bin/downloader.js",
+    "test": "mocha --compilers js:babel-register --recursive test",
+    "test-debug": "iron-node ./node_modules/mocha/bin/_mocha --compilers js:babel-register --recursive test",
+    "watch": "mocha --compilers js:babel-register --recursive test --watch",
+    "lint": "eslint src/*",
+    "lint-fix": "eslint --fix src/*"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.46.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "babel-register": "^6.24.0",
+    "chalk": "^1.1.3",
+    "cli-progress": "^1.4.1",
+    "moment": "^2.18.1",
+    "sox": "^0.1.0"
+  },
+  "devDependencies": {
+    "babel-polyfill": "^6.23.0",
+    "chai": "^3.5.0",
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^7.1.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^2.1.1",
+    "mocha": "^3.2.0",
+    "sinon": "^2.1.0"
+  }
+}

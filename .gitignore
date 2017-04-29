@@ -1,0 +1,7 @@
+.idea
+*.iml
+.vscode
+node_modules
+terraform/state/terraform.tfplan
+tmp
+.DS_Store

@@ -13,6 +13,7 @@ resource "aws_s3_bucket" "better-zoo" {
             },
             "Action": [
                 "s3:GetObject",
+                "s3:DeleteObject",
                 "s3:PutObject"
             ],
             "Resource": [

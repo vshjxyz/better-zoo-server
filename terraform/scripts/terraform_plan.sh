@@ -1,3 +1,3 @@
 #!/bin/bash
 terraform get
-terraform plan -out=./state/terraform.tfplan
+terraform plan -state=./state/terraform.tfstate -out=./state/terraform.tfplan

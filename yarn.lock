@@ -63,9 +63,9 @@ assertion-error@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/assertion-error/-/assertion-error-1.0.2.tgz#13ca515d86206da0bac66e834dd397d87581094c"
 
-aws-sdk@^2.46.0:
-  version "2.46.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.46.0.tgz#6856d5669d8b00a4cd42091beebf12be7d8ef48e"
+aws-sdk@^2.48.0:
+  version "2.48.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.48.0.tgz#c89bbdbd71fdd33457cd65c46c4080e4e44b2702"
   dependencies:
     buffer "4.9.1"
     crypto-browserify "1.0.9"

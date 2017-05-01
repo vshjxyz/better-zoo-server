@@ -15,7 +15,7 @@
     "lint-fix": "eslint --fix src/*"
   },
   "dependencies": {
-    "aws-sdk": "^2.46.0",
+    "aws-sdk": "^2.48.0",
     "babel-preset-es2015": "^6.24.0",
     "babel-preset-stage-3": "^6.24.1",
     "babel-register": "^6.24.0",

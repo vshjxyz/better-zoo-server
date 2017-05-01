@@ -109,7 +109,7 @@ const uploadFileToS3 = (filePath, bucketName, key) => {
 
 export default () => {
   moment.locale('it')
-  const day = moment().subtract(4, 'day')
+  const day = moment().subtract(5, 'day')
   const filename = `${moment(day).format('ddd_DDMMYYYY')}_ZOO${constants.EXTENSION}`
 
   download(filename)

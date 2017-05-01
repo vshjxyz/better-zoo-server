@@ -112,9 +112,8 @@ export default () => {
   const day = moment().subtract(4, 'day')
   const filename = `${moment(day).format('ddd_DDMMYYYY')}_ZOO${constants.EXTENSION}`
 
-  // download(filename)
-  // .then(convertToOgg)
-  Promise.resolve(['tmp/' + filename, 'tmp/' + filename.replace('.mp3', '.ogg')])
+  download(filename)
+  .then(convertToOgg)
     .then(([inputFile, outputFile]) =>
       unlinkPromise(inputFile)
         .then(() => outputFile)

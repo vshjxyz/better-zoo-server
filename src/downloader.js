@@ -52,7 +52,7 @@ const download = (filename) => {
 
 const convertToOgg = (inputFile) => {
   return new Promise((resolve, reject) => {
-    const outputFile = path.join(constants.DOWNLOAD_DIR, inputFile.replace('.mp3', '.ogg'))
+    const outputFile = inputFile.replace('.mp3', '.ogg')
     const UI = new progress.Bar({
       stream: process.stdout
     }, progress.Presets.rect)

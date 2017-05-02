@@ -20,7 +20,7 @@ export default () => {
     .then((fullPath) => uploadFileToS3(
       fullPath,
       constants.BUCKET_NAME,
-      filename.replace('.mp3', '.ogg')
+      filename
     ))
     .then(([filePath, bucketName, key]) => {
       console.log(

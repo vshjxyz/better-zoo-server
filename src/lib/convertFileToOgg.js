@@ -4,7 +4,7 @@ import sox from 'sox'
 
 export default (inputFile) => {
   return new Promise((resolve, reject) => {
-    const outputFile = inputFile.replace('.mp3', '.ogg')
+    const outputFile = inputFile.replace('.mp3', '2.mp3')
     const UI = new progress.Bar({
       stream: process.stdout
     }, progress.Presets.rect)
@@ -14,7 +14,7 @@ export default (inputFile) => {
       outputFile,
       {
         sampleRate: 44100,
-        format: 'ogg',
+        format: 'mp3',
         channelCount: 2,
         bitRate: 96 * 1024,
         compressionQuality: 2 - 96 // see `man soxformat` search for '-C' for more info
@@ -24,7 +24,7 @@ export default (inputFile) => {
 
     job.on('progress', (amountDone, amountTotal) => {
       if (!UI.startTime) {
-        console.log(clk.gray(`Converting ${clk.magenta(inputFile)} to ogg`))
+        console.log(clk.gray(`Compressing ${clk.magenta(inputFile)}...`))
         UI.start(100, 0)
       }
 

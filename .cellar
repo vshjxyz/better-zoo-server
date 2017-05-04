@@ -1,3 +1,2 @@
 lame
-vorbis-tools
-sox --with-lame --with-libvorbis
+sox --with-lame

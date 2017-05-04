@@ -17,7 +17,7 @@ export default (inputFile) => {
         format: 'mp3',
         channelCount: 2,
         bitRate: 96 * 1024,
-        compressionQuality: 2 - 96 // see `man soxformat` search for '-C' for more info
+        compressionQuality: 3 - 96 // see `man soxformat` search for '-C' for more info
       })
 
     job.on('error', reject)

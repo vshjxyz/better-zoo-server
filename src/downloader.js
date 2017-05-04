@@ -2,20 +2,19 @@ import clk from 'chalk'
 import moment from 'moment'
 import constants from './constants/shared'
 import download from './lib/download'
-import convertFileToOgg from './lib/convertFileToOgg'
+import downsampleMp3 from './lib/downsampleMp3'
 import deleteFile from './lib/deleteFile'
 import uploadFileToS3 from './lib/uploadFileToS3'
 
 export default () => {
   moment.locale('it')
-  const day = moment().subtract(5, 'day')
+  const day = moment().subtract(7, 'day')
   const filename = `${moment(day).format('ddd_DDMMYYYY')}_ZOO${constants.EXTENSION}`
 
   download(filename)
-    .then(convertFileToOgg)
+    .then(downsampleMp3)
     .then(([inputFile, outputFile]) =>
-      deleteFile(inputFile)
-        .then(() => outputFile)
+      deleteFile(inputFile).then(() => outputFile)
     )
     .then((fullPath) => uploadFileToS3(
       fullPath,
@@ -35,3 +34,5 @@ export default () => {
     })
     .catch((err) => console.error(err))
 }
+
+

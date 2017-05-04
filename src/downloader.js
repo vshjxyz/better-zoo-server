@@ -8,7 +8,7 @@ import uploadFileToS3 from './lib/uploadFileToS3'
 
 export default () => {
   moment.locale('it')
-  const day = moment().subtract(7, 'day')
+  const day = moment()
   const filename = `${moment(day).format('ddd_DDMMYYYY')}_ZOO${constants.EXTENSION}`
 
   download(filename)

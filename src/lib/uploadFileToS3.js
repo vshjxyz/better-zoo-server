@@ -6,7 +6,7 @@ export default (filePath, bucketName, key) => {
   const params = {
     Bucket: bucketName,
     Key: key,
-    ContentType: `audio/mp3`,
+    ContentType: `audio/mpeg`,
     Body: fs.createReadStream(filePath)
   }
 

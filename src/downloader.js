@@ -6,9 +6,9 @@ import downsampleMp3 from './lib/downsampleMp3'
 import deleteFile from './lib/deleteFile'
 import uploadFileToS3 from './lib/uploadFileToS3'
 
-export default () => {
+export default (day) => {
   moment.locale('it')
-  const day = moment()
+  day = day ? moment(day, 'YYYYMMDD') : moment()
   const filename = `${moment(day).format('ddd_DDMMYYYY')}_ZOO${constants.EXTENSION}`
 
   download(filename)

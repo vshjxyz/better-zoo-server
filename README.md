@@ -23,6 +23,7 @@ yarn start 20170512 # This will rip the MP3 for a specific day
 ```
 
 You should see:
+![better-zoo download](https://cloud.githubusercontent.com/assets/958803/26038895/af2d814a-3912-11e7-896a-7588c59bfab2.gif)
 
 
 

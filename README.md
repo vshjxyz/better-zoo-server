@@ -41,4 +41,4 @@ aws_secret_access_key = <your secret>
 aws_default_region = eu-west-1
 ```
 
-Then when from the `terraform` folder you can use `./scripts/terraform_plan.sh` to create a precise updating plan and `./scripts/terraform_apply.sh` to apply it.
+Then from the `terraform` folder you can launch `./scripts/terraform_plan.sh` to create a precise updating plan and `./scripts/terraform_apply.sh` to apply it (that will create an aws IAM user, an access key, an s3 bucket and an heroku node).

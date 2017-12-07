@@ -34,5 +34,3 @@ export default (day) => {
     })
     .catch((err) => console.error(err))
 }
-
-

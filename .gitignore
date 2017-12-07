@@ -4,5 +4,6 @@
 node_modules
 terraform/terraform.tfplan
 terraform/terraform.tfstate.backup
+terraform/.terraform
 tmp
 .DS_Store

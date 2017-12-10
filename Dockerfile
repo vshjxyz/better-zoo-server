@@ -35,7 +35,7 @@ WORKDIR /usr/src
 RUN wget "http://downloads.sourceforge.net/project/mad/libmad/0.15.1b/libmad-0.15.1b.tar.gz?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fmad%2Ffiles%2Flibmad%2F0.15.1b%2F&ts=1476010202&use_mirror=ufpr" -O libmad-0.15.1b.tar.gz
 RUN tar zxf libmad-0.15.1b.tar.gz
 
-WORKDIR /usr/src/libmad-0.15.1
+WORKDIR /usr/src/libmad-0.15.1b
 # The following line is a patch to fix the build with newer GCC's that don't have the -fforce-mem option
 RUN sed -i '/-fforce-mem/d' configure
 RUN ./configure --prefix=/usr/libmad-0.15.1b --enable-static --disable-shared

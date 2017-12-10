@@ -32,6 +32,17 @@ WORKDIR /src
 RUN npm i && npm i -g yarn
 
 WORKDIR /usr/src
+RUN wget "http://downloads.sourceforge.net/project/mad/libmad/0.15.1b/libmad-0.15.1b.tar.gz?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fmad%2Ffiles%2Flibmad%2F0.15.1b%2F&ts=1476010202&use_mirror=ufpr" -O libmad-0.15.1b.tar.gz
+RUN tar zxf libmad-0.15.1b.tar.gz
+
+WORKDIR /usr/src/libmad-0.15.1
+# The following line is a patch to fix the build with newer GCC's that don't have the -fforce-mem option
+RUN sed -i '/-fforce-mem/d' configure
+RUN ./configure --prefix=/usr/libmad-0.15.1b --enable-static --disable-shared
+RUN make
+RUN make install
+
+WORKDIR /usr/src
 RUN wget "https://downloads.sourceforge.net/project/lame/lame/3.99/lame-3.99.5.tar.gz" -O lame-3.99.5.tar.gz
 RUN tar zxf lame-3.99.5.tar.gz
 
@@ -45,9 +56,10 @@ RUN wget "https://downloads.sourceforge.net/project/sox/sox/14.4.2/sox-14.4.2.ta
 RUN tar jxf sox-14.4.2.tar.bz2
 
 WORKDIR /usr/src/sox-14.4.2
-RUN CPPFLAGS="-I/usr/lame-3.99.5/include " \
-  LDFLAGS="-L/usr/lame-3.99.5/lib" \
-  ./configure --prefix=/usr/sox-14.4.2 --disable-shared --enable-static --with-lame
+
+RUN CPPFLAGS="-I/usr/libmad-0.15.1b/include -I/usr/lame-3.99.5/include " \
+    LDFLAGS="-L/usr/libmad-0.15.1b/lib -L/usr/lame-3.99.5/lib -L/usr/libgsm-1.0.10/lib" \
+    ./configure --prefix=/usr/sox-14.4.2 --disable-shared --enable-static --with-lame
 RUN make
 RUN make install
 

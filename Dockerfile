@@ -3,7 +3,7 @@ FROM debian:stretch
 WORKDIR /usr/src
 
 RUN apt-get update
-RUN apt-get install wget build-essential -y
+RUN apt-get install wget sed build-essential -y
 
 ENV NVM_DIR /usr/local/nvm
 ENV NODE_VERSION 7.7.4

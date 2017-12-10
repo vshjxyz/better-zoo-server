@@ -47,7 +47,7 @@ RUN tar jxf sox-14.4.2.tar.bz2
 WORKDIR /usr/src/sox-14.4.2
 RUN CPPFLAGS="-I/usr/lame-3.99.5/include " \
   LDFLAGS="-L/usr/lame-3.99.5/lib" \
-  ./configure --prefix=/usr/sox-14.4.2 --disable-shared --enable-static
+  ./configure --prefix=/usr/sox-14.4.2 --disable-shared --enable-static --with-lame
 RUN make
 RUN make install
 

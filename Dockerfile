@@ -69,3 +69,5 @@ RUN apt-get remove --purge wget build-essential -y
 RUN apt-get clean
 
 WORKDIR /src
+
+CMD [ "yarn", "start" ]

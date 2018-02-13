@@ -11,26 +11,26 @@ export default (day) => {
   day = day ? moment(day, 'YYYYMMDD') : moment()
   const filename = `${moment(day).format('ddd_DDMMYYYY')}_zoo${constants.EXTENSION}`
 
-  download(filename)
-    .then(downsampleMp3)
-    .then(([inputFile, outputFile]) =>
-      deleteFile(inputFile).then(() => outputFile)
+  download(filename, constants.MAX_ATTEMPTS)
+  .then(downsampleMp3)
+  .then(([inputFile, outputFile]) =>
+    deleteFile(inputFile).then(() => outputFile)
+  )
+  .then((fullPath) => uploadFileToS3(
+    fullPath,
+    constants.BUCKET_NAME,
+    filename
+  ))
+  .then(([filePath, bucketName, key]) => {
+    console.log(
+      clk.grey(`File ${clk.magenta(filePath)} uploaded to ${clk.magenta(`s3://${bucketName}/${key}`)}`)
     )
-    .then((fullPath) => uploadFileToS3(
-      fullPath,
-      constants.BUCKET_NAME,
-      filename
-    ))
-    .then(([filePath, bucketName, key]) => {
-      console.log(
-        clk.grey(`File ${clk.magenta(filePath)} uploaded to ${clk.magenta(`s3://${bucketName}/${key}`)}`)
-      )
-      return deleteFile(filePath)
-    })
-    .then((filePath) => {
-      console.log(
-        clk.grey(`File ${clk.magenta(filePath)} deleted`)
-      )
-    })
-    .catch((err) => console.error(err))
+    return deleteFile(filePath)
+  })
+  .then((filePath) => {
+    console.log(
+      clk.grey(`File ${clk.magenta(filePath)} deleted`)
+    )
+  })
+  .catch((err) => console.error(err))
 }

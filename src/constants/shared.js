@@ -3,6 +3,6 @@ export default {
   EXTENSION: '.mp3',
   DOWNLOAD_DIR: 'tmp',
   BUCKET_NAME: 'better-zoo',
-  MAX_ATTEMPTS: 3,
-  RETRY_INTERVAL: 900
+  MAX_ATTEMPTS: process.env.MAX_ATTEMPTS || 3,
+  RETRY_INTERVAL: process.env.MAX_ATTEMPTS || 15
 }

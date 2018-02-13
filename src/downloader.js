@@ -11,7 +11,7 @@ export default (day) => {
   day = day ? moment(day, 'YYYYMMDD') : moment()
   const filename = `${moment(day).format('ddd_DDMMYYYY')}_zoo${constants.EXTENSION}`
 
-  download(filename)
+  download(filename, constants.MAX_ATTEMPTS)
     .then(downsampleMp3)
     .then(([inputFile, outputFile]) =>
       deleteFile(inputFile).then(() => outputFile)

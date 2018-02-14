@@ -1,5 +1,6 @@
 better-zoo-server
 ===
+[![Build Status](https://travis-ci.org/vshjxyz/better-zoo-server.svg?branch=master)](https://travis-ci.org/vshjxyz/better-zoo-server)
 
 This little experimental project aims to hit a URL with one or more public MP3 files, downloads it, compresses it using [Sox](http://sox.sourceforge.net/) and uploads it to an S3 bucket
 

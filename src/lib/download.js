@@ -17,8 +17,7 @@ export default function download (filename, attempts = constants.MAX_ATTEMPTS) {
     const fullUrl = constants.BASE_URL + filename
 
     if (attempts === 0) {
-      reject(new Error(clk.red(`Failed to download file from: ${fullUrl} after ${constants.MAX_ATTEMPTS} attempts.`)))
-      return
+      return reject(new Error(clk.red(`Failed to download file from: ${fullUrl} after ${constants.MAX_ATTEMPTS} attempts.`)))
     }
 
     const file = fs.createWriteStream(fullpath)
@@ -31,15 +30,16 @@ export default function download (filename, attempts = constants.MAX_ATTEMPTS) {
       (response) => {
         let cur = 0
         const responseType = response.headers['content-type']
-        if (!responseType.includes('audio')) {
-          console.log((clk.red(`No audio file found: ${clk.magenta(fullUrl)} \ntrying again in ${retryInterval.asMinutes()} minutes.`)))
+        const total = parseInt(response.headers['content-length'], 10)
+        const totalInMB = (total / (1024 * 1024)).toFixed(2)
+
+        if (response.statusCode !== 200 && !total && !responseType.includes('audio')) {
+          reject(new Error(clk.red(`No audio file found: ${clk.magenta(fullUrl)} \ntrying again in ${retryInterval.asMinutes()} minutes.`)))
           return setTimeout(() => (
             download(filename, attempts - 1)
             .catch(err => console.log(err))
           ), retryInterval.asMilliseconds())
         }
-        const total = parseInt(response.headers['content-length'], 10)
-        const totalInMB = (total / (1024 * 1024)).toFixed(2)
 
         console.log(clk.gray(`Downloading ${clk.magenta(fullUrl)}`))
 

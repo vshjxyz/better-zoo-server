@@ -25,6 +25,11 @@ export default function download (filename, attempts = constants.MAX_ATTEMPTS) {
       stream: process.stdout
     }, progress.Presets.rect)
 
+    if (attempts === 0) {
+      reject(new Error(clk.red(`Unable to download ${fullUrl}`)))
+      return
+    }
+
     http.get(
       fullUrl,
       (response) => {

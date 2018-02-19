@@ -28,7 +28,7 @@ export default function download (filename, attempts = constants.MAX_ATTEMPTS) {
     const errorHandler = (e) => reject(new Error(e))
 
     const request = http.get(
-    fullUrl,
+      fullUrl,
       (response) => {
         let cur = 0
         const responseType = response.headers['content-type']

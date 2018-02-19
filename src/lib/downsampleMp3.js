@@ -1,13 +1,18 @@
 import progress from 'cli-progress'
 import clk from 'chalk'
 import sox from 'sox'
+import constants from '../constants/shared'
 
-export default (inputFile) => {
+export default function compressAudio (inputFile, attempts = constants.MAX_ATTEMPTS) {
   return new Promise((resolve, reject) => {
     const outputFile = inputFile.replace('.mp3', '2.mp3')
     const UI = new progress.Bar({
       stream: process.stdout
     }, progress.Presets.rect)
+
+    if (attempts === 0) {
+      return reject(new Error(clk.red(`Failed to convert file: ${inputFile} after ${constants.MAX_ATTEMPTS} attempts.`)))
+    }
 
     const job = sox.transcode(
       inputFile,
@@ -20,7 +25,13 @@ export default (inputFile) => {
         compressionQuality: 5 - 96 // see `man soxformat` search for '-C' for more info
       })
 
-    job.on('error', reject)
+    job.on('error', () => {
+      reject(new Error(clk.red(`Failed to convert file: ${inputFile} \n retrying...`)))
+      return setTimeout(() => (
+        compressAudio(inputFile, attempts - 1)
+        .catch(err => console.log(err))
+      ), 2000)
+    })
 
     job.on('progress', (amountDone, amountTotal) => {
       if (!UI.startTime) {

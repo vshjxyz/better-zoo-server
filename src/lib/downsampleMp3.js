@@ -30,7 +30,7 @@ export default function compressAudio (inputFile, attempts = constants.MAX_ATTEM
       return setTimeout(() => (
         compressAudio(inputFile, attempts - 1)
         .catch(err => console.log(err))
-      ), 2000)
+      ), 5000)
     })
 
     job.on('progress', (amountDone, amountTotal) => {

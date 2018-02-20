@@ -12,7 +12,7 @@ export default function download (filename, attempts = constants.MAX_ATTEMPTS) {
       fs.mkdirSync(constants.DOWNLOAD_DIR)
     }
 
-    const retryInterval = moment.duration(constants.RETRY_INTERVAL, 'minutes')
+    const retryInterval = moment.duration(constants.RETRY_INTERVAL_DOWNLOAD, 'minutes')
     const fullpath = path.join(constants.DOWNLOAD_DIR, filename)
     const fullUrl = constants.BASE_URL + filename
 

@@ -2,6 +2,7 @@ import progress from 'cli-progress'
 import clk from 'chalk'
 import sox from 'sox'
 import constants from '../constants/shared'
+import moment from 'moment'
 
 export default function compressAudio (inputFile, attempts = constants.MAX_ATTEMPTS) {
   return new Promise((resolve, reject) => {
@@ -9,6 +10,7 @@ export default function compressAudio (inputFile, attempts = constants.MAX_ATTEM
     const UI = new progress.Bar({
       stream: process.stdout
     }, progress.Presets.rect)
+    const retryInterval = moment.duration(constants.RETRY_INTERVAL_CONVERSION, 'seconds')
 
     if (attempts === 0) {
       return reject(new Error(clk.red(`Failed to convert file: ${inputFile} after ${constants.MAX_ATTEMPTS} attempts.`)))
@@ -26,11 +28,10 @@ export default function compressAudio (inputFile, attempts = constants.MAX_ATTEM
       })
 
     job.on('error', () => {
-      reject(new Error(clk.red(`Failed to convert file: ${inputFile} \n retrying...`)))
-      return setTimeout(() => (
-        compressAudio(inputFile, attempts - 1)
-        .catch(err => console.log(err))
-      ), 5000)
+      console.error(new Error(clk.red(`Failed to convert file: ${inputFile} \n retrying...`)))
+      setTimeout(() => (
+        resolve(compressAudio(inputFile, attempts - 1))
+        ), retryInterval.asMilliseconds())
     })
 
     job.on('progress', (amountDone, amountTotal) => {

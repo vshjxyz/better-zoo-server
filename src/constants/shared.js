@@ -4,5 +4,6 @@ export default {
   DOWNLOAD_DIR: 'tmp',
   BUCKET_NAME: 'better-zoo',
   MAX_ATTEMPTS: process.env.MAX_ATTEMPTS || 3,
-  RETRY_INTERVAL: process.env.MAX_ATTEMPTS || 15
+  RETRY_INTERVAL_DOWNLOAD: process.env.RETRY_INTERVAL_DOWNLOAD || 15,
+  RETRY_INTERVAL_CONVERSION: process.env.RETRY_INTERVAL_CONVERSION || 5
 }

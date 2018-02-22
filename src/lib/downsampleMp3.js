@@ -29,7 +29,7 @@ export default function compressAudio (inputFile, attempts = constants.MAX_ATTEM
 
     job.on('error', () => {
       console.error(new Error(clk.red(`Failed to convert file: ${inputFile} \n retrying...`)))
-      setTimeout(() => (
+      return setTimeout(() => (
         resolve(compressAudio(inputFile, attempts - 1))
         ), retryInterval.asMilliseconds())
     })

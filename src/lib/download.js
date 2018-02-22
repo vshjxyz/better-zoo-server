@@ -36,10 +36,9 @@ export default function download (filename, attempts = constants.MAX_ATTEMPTS) {
         const totalInMB = (total / (1024 * 1024)).toFixed(2)
 
         if (response.statusCode !== 200 || !total || !responseType.includes('audio')) {
-          reject(new Error(`No audio file found: ${clk.magenta(fullUrl)} \ntrying again in ${retryInterval.asMinutes()} minutes.`))
+          console.error(new Error(clk.red(`No audio file found: ${clk.magenta(fullUrl)} \ntrying again in ${retryInterval.asMinutes()} minutes.`)))
           return setTimeout(() => (
-            download(filename, attempts - 1)
-            .catch(err => console.log(err))
+            resolve(download(filename, attempts - 1))
           ), retryInterval.asMilliseconds())
         }
 

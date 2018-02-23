@@ -12,7 +12,8 @@
     "test-debug": "iron-node ./node_modules/mocha/bin/_mocha --compilers js:babel-register --recursive test",
     "watch": "mocha --compilers js:babel-register --recursive test --watch",
     "lint": "eslint src/* --ignore-path .gitignore --fix",
-    "lint-fix": "eslint --fix src/*"
+    "lint-fix": "eslint --fix src/*",
+    "precommit": "lint-staged"
   },
   "dependencies": {
     "aws-sdk": "^2.48.0",
@@ -42,11 +43,11 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run test",
+      "pre-commit": "npm run test && npm run precommit",
       "pre-push": "npm run test"
     }
   },
   "lint-staged": {
-    "*.{js,json,css,md}": ["prettier --write", "git add"]
+    "*.js": ["eslint --fix src/*", "git add"]
   }
 }

@@ -12,7 +12,7 @@ export default function download (filename, attempts = constants.MAX_ATTEMPTS) {
       fs.mkdirSync(constants.DOWNLOAD_DIR)
     }
 
-    const retryInterval = moment.duration(constants.RETRY_INTERVAL, 'minutes')
+    const retryInterval = moment.duration(constants.RETRY_INTERVAL_DOWNLOAD, 'minutes')
     const fullpath = path.join(constants.DOWNLOAD_DIR, filename)
     const fullUrl = constants.BASE_URL + filename
 
@@ -35,11 +35,10 @@ export default function download (filename, attempts = constants.MAX_ATTEMPTS) {
         const total = parseInt(response.headers['content-length'], 10)
         const totalInMB = (total / (1024 * 1024)).toFixed(2)
 
-        if (response.statusCode !== 200 && !total && !responseType.includes('audio')) {
-          reject(new Error(`No audio file found: ${clk.magenta(fullUrl)} \ntrying again in ${retryInterval.asMinutes()} minutes.`))
+        if (response.statusCode !== 200 || !total || !responseType.includes('audio')) {
+          console.error(new Error(clk.red(`No audio file found: ${clk.magenta(fullUrl)} \ntrying again in ${retryInterval.asMinutes()} minutes.`)))
           return setTimeout(() => (
-            download(filename, attempts - 1)
-            .catch(err => console.log(err))
+            resolve(download(filename, attempts - 1))
           ), retryInterval.asMilliseconds())
         }
 

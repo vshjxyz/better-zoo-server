@@ -12,7 +12,6 @@
     "test-debug": "iron-node ./node_modules/mocha/bin/_mocha --compilers js:babel-register --recursive test",
     "watch": "mocha --compilers js:babel-register --recursive test --watch",
     "lint": "eslint src/* --ignore-path .gitignore --fix",
-    "lint-fix": "eslint --fix src/*",
     "precommit": "lint-staged"
   },
   "dependencies": {
@@ -48,6 +47,6 @@
     }
   },
   "lint-staged": {
-    "*.js": ["eslint --fix src/*", "git add"]
+    "*.js": ["npm run lint", "git add"]
   }
 }

@@ -11,6 +11,9 @@ export default (filePath, bucketName, key) => {
   }
 
   return new Promise((resolve, reject) => {
-    s3.putObject(params, err => err ? reject(err) : resolve([filePath, bucketName, key]))
+    s3.putObject(
+      params,
+      err => (err ? reject(err) : resolve([filePath, bucketName, key]))
+    )
   })
 }

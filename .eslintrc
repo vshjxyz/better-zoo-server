@@ -1,5 +1,12 @@
 {
-  "extends": [ "standard" ],
+  "extends": [
+    "prettier",
+    "prettier/standard"
+   ],
+   "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "module"
+  },
   "env": {
     "mocha": true
   },
@@ -7,5 +14,16 @@
     "sinon": true,
     "prompt": true,
     "expect": true
+  },
+  "plugins": [
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": [
+      "error", {
+        "singleQuote": true,
+        "semi": false
+      }
+    ]
   }
 }

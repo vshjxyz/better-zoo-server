@@ -8,7 +8,7 @@
   "scripts": {
     "start": "node bin/downloader.js",
     "debug": "iron-node bin/downloader.js",
-    "test": "mocha --compilers js:babel-register --recursive test",
+    "test": "jest",
     "test-debug": "iron-node ./node_modules/mocha/bin/_mocha --compilers js:babel-register --recursive test",
     "watch": "mocha --compilers js:babel-register --recursive test --watch",
     "lint": "eslint src/* --ignore-path .gitignore --fix",

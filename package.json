@@ -8,7 +8,7 @@
   "scripts": {
     "start": "node bin/downloader.js",
     "debug": "iron-node bin/downloader.js",
-    "test": "mocha --compilers js:babel-register --recursive test",
+    "test": "jest",
     "test-debug": "iron-node ./node_modules/mocha/bin/_mocha --compilers js:babel-register --recursive test",
     "watch": "mocha --compilers js:babel-register --recursive test --watch",
     "lint": "eslint src/* --ignore-path .gitignore --fix",
@@ -26,7 +26,6 @@
   },
   "devDependencies": {
     "babel-polyfill": "^6.23.0",
-    "chai": "^3.5.0",
     "eslint": "^3.19.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-config-standard": "^7.1.0",
@@ -35,10 +34,9 @@
     "eslint-plugin-standard": "^2.1.1",
     "husky": "^0.14.3",
     "iron-node": "^3.0.18",
+    "jest": "^22.4.2",
     "lint-staged": "^7.0.0",
-    "mocha": "^3.2.0",
-    "prettier": "^1.10.2",
-    "sinon": "^2.1.0"
+    "prettier": "^1.10.2"
   },
   "husky": {
     "hooks": {
@@ -47,6 +45,9 @@
     }
   },
   "lint-staged": {
-    "*.js": ["npm run lint", "git add"]
+    "*.js": [
+      "npm run lint",
+      "git add"
+    ]
   }
 }

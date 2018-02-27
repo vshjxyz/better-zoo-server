@@ -11,8 +11,8 @@
     "test": "mocha --compilers js:babel-register --recursive test",
     "test-debug": "iron-node ./node_modules/mocha/bin/_mocha --compilers js:babel-register --recursive test",
     "watch": "mocha --compilers js:babel-register --recursive test --watch",
-    "lint": "eslint src/*",
-    "lint-fix": "eslint --fix src/*"
+    "lint": "eslint src/* --ignore-path .gitignore --fix",
+    "precommit": "lint-staged"
   },
   "dependencies": {
     "aws-sdk": "^2.48.0",
@@ -28,11 +28,25 @@
     "babel-polyfill": "^6.23.0",
     "chai": "^3.5.0",
     "eslint": "^3.19.0",
+    "eslint-config-prettier": "^2.9.0",
     "eslint-config-standard": "^7.1.0",
+    "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^2.1.1",
+    "husky": "^0.14.3",
     "iron-node": "^3.0.18",
+    "lint-staged": "^7.0.0",
     "mocha": "^3.2.0",
+    "prettier": "^1.10.2",
     "sinon": "^2.1.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test",
+      "pre-push": "npm run test"
+    }
+  },
+  "lint-staged": {
+    "*.js": ["npm run lint", "git add"]
   }
 }

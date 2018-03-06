@@ -1,5 +1,4 @@
 import constants from '../src/constants/shared'
-// import { requestEventEmitter, responseEventEmitter } from '../__mocks__/http'
 import EventEmitter from 'events'
 import moment from 'moment'
 import clk from 'chalk'
@@ -18,6 +17,7 @@ describe('downloads an mp3 file', () => {
   let consoleError
   let responseEventEmitter
   let requestEventEmitter
+
   beforeEach(() => {
     responseEventEmitter = new EventEmitter()
     requestEventEmitter = new EventEmitter()

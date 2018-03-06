@@ -8,9 +8,9 @@
   "scripts": {
     "start": "node bin/downloader.js",
     "debug": "iron-node bin/downloader.js",
-    "test": "jest",
-    "test-debug": "iron-node ./node_modules/mocha/bin/_mocha --compilers js:babel-register --recursive test",
-    "watch": "mocha --compilers js:babel-register --recursive test --watch",
+    "test": "jest -i",
+    "test-debug": "node --inspect-brk ./node_modules/.bin/jest -i",
+    "test-watch": "jest --watch",
     "lint": "eslint src/* --ignore-path .gitignore --fix",
     "precommit": "lint-staged"
   },
@@ -36,7 +36,8 @@
     "iron-node": "^3.0.18",
     "jest": "^22.4.2",
     "lint-staged": "^7.0.0",
-    "prettier": "^1.10.2"
+    "prettier": "^1.10.2",
+    "proxyquire": "^1.8.0"
   },
   "husky": {
     "hooks": {
@@ -49,5 +50,9 @@
       "npm run lint",
       "git add"
     ]
+  },
+  "jest": {
+    "verbose": true,
+    "setupTestFrameworkScriptFile": "<rootDir>/test/jest_setup.js"
   }
 }

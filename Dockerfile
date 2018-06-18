@@ -30,7 +30,7 @@ COPY .nvmrc /src/.nvmrc
 WORKDIR /src
 
 RUN npm i -g yarn
-RUN yarn
+RUN yarn --frozen-lockfile
 
 WORKDIR /usr/src
 RUN wget "http://downloads.sourceforge.net/project/mad/libmad/0.15.1b/libmad-0.15.1b.tar.gz?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fmad%2Ffiles%2Flibmad%2F0.15.1b%2F&ts=1476010202&use_mirror=ufpr" -O libmad-0.15.1b.tar.gz

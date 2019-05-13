@@ -59,7 +59,7 @@ export default function compressAudio(
         UI.start(100, 0)
       }
 
-      UI.update((amountDone / amountTotal * 100).toFixed(2))
+      UI.update(((amountDone / amountTotal) * 100).toFixed(2))
     })
 
     job.on('end', () => {

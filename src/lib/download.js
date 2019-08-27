@@ -2,7 +2,7 @@ import constants from '../constants/shared'
 import progress from 'cli-progress'
 import fs from 'fs'
 import path from 'path'
-import http from 'http'
+import { http, https } from 'follow-redirects'
 import clk from 'chalk'
 import moment from 'moment'
 
@@ -41,12 +41,13 @@ export default function download(filename, attempts = constants.MAX_ATTEMPTS) {
 
     const errorHandler = e => reject(new Error(e))
 
-    const request = http.get(fullUrl, response => {
+    const isHttps = fullUrl.includes('https://')
+
+    const request = (isHttps ? https : http).get(fullUrl, response => {
       let cur = 0
       const responseType = response.headers['content-type']
       const total = parseInt(response.headers['content-length'], 10)
       const totalInMB = (total / (1024 * 1024)).toFixed(2)
-
       if (
         response.statusCode !== 200 ||
         !total ||

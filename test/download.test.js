@@ -33,10 +33,12 @@ describe('downloads an mp3 file', () => {
     console.error = consoleError
   })
 
-  jest.doMock('http', () => ({
-    get: (url, cb) => {
-      cb(requestEventEmitter)
-      return responseEventEmitter
+  jest.doMock('follow-redirects', () => ({
+    http: {
+      get: (url, cb) => {
+        cb(requestEventEmitter)
+        return responseEventEmitter
+      }
     }
   }))
 

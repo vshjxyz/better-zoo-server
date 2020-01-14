@@ -9,8 +9,9 @@ import uploadFileToS3 from './lib/uploadFileToS3'
 export default day => {
   moment.locale('it')
   day = day ? moment(day, 'YYYYMMDD') : moment()
-  const format = process.env.FILE_FORMAT || 'ddd_DDMMYYYY'
-  const filename = `${moment(day).format(format)}${constants.EXTENSION}`
+  const filename = `${moment(day).format(constants.FILE_FORMAT)}${
+    constants.EXTENSION
+  }`
 
   download(filename)
     .then(downsampleMp3)

@@ -9,11 +9,12 @@ import uploadFileToS3 from './lib/uploadFileToS3'
 export default day => {
   moment.locale('it')
   day = day ? moment(day, 'YYYYMMDD') : moment()
+  const prefix = moment(day).format(constants.FILE_PREFIX)
   const filename = `${moment(day).format(constants.FILE_FORMAT)}${
     constants.EXTENSION
   }`
 
-  download(filename)
+  download(filename, prefix)
     .then(downsampleMp3)
     .then(([inputFile, outputFile]) =>
       deleteFile(inputFile).then(() => outputFile)

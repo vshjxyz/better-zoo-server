@@ -6,7 +6,11 @@ import { http, https } from 'follow-redirects'
 import clk from 'chalk'
 import moment from 'moment'
 
-export default function download(filename, attempts = constants.MAX_ATTEMPTS) {
+export default function download(
+  filename,
+  prefix = '',
+  attempts = constants.MAX_ATTEMPTS
+) {
   return new Promise((resolve, reject) => {
     if (!fs.existsSync(constants.DOWNLOAD_DIR)) {
       fs.mkdirSync(constants.DOWNLOAD_DIR)
@@ -16,8 +20,8 @@ export default function download(filename, attempts = constants.MAX_ATTEMPTS) {
       constants.RETRY_INTERVAL_DOWNLOAD,
       'minutes'
     )
-    const fullpath = path.join(constants.DOWNLOAD_DIR, filename)
-    const fullUrl = constants.BASE_URL + filename
+    const fullPath = path.join(constants.DOWNLOAD_DIR, filename)
+    const fullUrl = constants.BASE_URL + prefix + filename
 
     if (attempts === 0) {
       return reject(
@@ -31,7 +35,7 @@ export default function download(filename, attempts = constants.MAX_ATTEMPTS) {
       )
     }
 
-    const file = fs.createWriteStream(fullpath)
+    const file = fs.createWriteStream(fullPath)
     const UI = new progress.Bar(
       {
         stream: process.stdout
@@ -63,7 +67,7 @@ export default function download(filename, attempts = constants.MAX_ATTEMPTS) {
           )
         )
         return setTimeout(
-          () => resolve(download(filename, attempts - 1)),
+          () => resolve(download(filename, prefix, attempts - 1)),
           retryInterval.asMilliseconds()
         )
       }
@@ -81,7 +85,7 @@ export default function download(filename, attempts = constants.MAX_ATTEMPTS) {
       response.on('error', errorHandler)
       response.on('end', () => {
         UI.stop()
-        resolve(fullpath)
+        resolve(fullPath)
       })
 
       response.pipe(file)

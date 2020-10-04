@@ -7,3 +7,4 @@ terraform/terraform.tfstate.backup
 terraform/.terraform
 tmp
 .DS_Store
+.env
